@@ -14,6 +14,8 @@ void bill_body();
 void generate_bill_header();
 void createBill();
 void operationExitFunction();
+void update_list();
+void main_operation();
 
 struct items
 {
@@ -31,6 +33,7 @@ struct orders
     float vat;
     float total;
     float total_vat;
+    int update = -1;
     struct items itm[50];
 };
 struct orders ord;
@@ -66,45 +69,7 @@ int main()
             fgetc(stdin);
             inputItems(i);
         }
-        do
-        {
-            cout << "\n1.Item Insert";
-            cout << "\n2.Item delete";
-            cout << "\n3.Item search ( Linear searching operation )";
-            cout << "\n4.Items Display ( Only for operation shows )";
-            cout << "\n5.Create Bill";
-            cout << "\n\n### without (1,2,3,4,5) keys Press any key to Exit ###";
-            cout << "\n\nInput your choise : ";
-            cin >> choise_operation;
-            switch (choise_operation)
-            {
-            case 1:
-                system("cls");
-                insert_item();
-                break;
-
-            case 2:
-                system("cls");
-                delete_item();
-                break;
-            case 3:
-                system("cls");
-                search_item();
-                break;
-            case 4:
-                system("cls");
-                display();
-                break;
-            case 5:
-                system("cls");
-                createBill();
-                break;
-            default:
-                operationExitFunction();
-
-                break;
-            }
-        } while (exit);
+        main_operation();
 
         break;
     default:
@@ -112,6 +77,91 @@ int main()
         break;
     }
 }
+void main_operation()
+{
+    int choise_operation;
+    do
+    {
+        system("cls");
+        cout << "\n1.Item Insert";
+        cout << "\n2.Item delete";
+        cout << "\n3.Update list";
+        cout << "\n4.Item search ( Linear searching operation )";
+        cout << "\n5.Items Display ( Only for operation shows )";
+        cout << "\n6.Create Bill";
+        cout << "\n\n### without (1,2,3,4,5) keys Press any key to Exit ###";
+        cout << "\n\nInput your choise : ";
+        cin >> choise_operation;
+        switch (choise_operation)
+        {
+        case 1:
+            system("cls");
+            insert_item();
+            break;
+
+        case 2:
+            system("cls");
+            delete_item();
+            break;
+        case 3:
+            system("cls");
+            update_list();
+            break;
+        case 4:
+            system("cls");
+            search_item();
+            break;
+        case 5:
+            system("cls");
+            display();
+            break;
+        case 6:
+            system("cls");
+            createBill();
+            break;
+        default:
+            operationExitFunction();
+
+            break;
+        }
+    } while (exit);
+}
+void update_list()
+{
+    cout << "\n----******------Update manue--------*******-------\n";
+    int choise;
+    char exit_menu;
+    search_item();
+    if (ord.update != -1)
+    {
+        system("cls");
+        cout << "\n----******------Update manue--------*******-------\n";
+        cout << "\n1.Update Item\n2.Update quantity\n3.Update price\n";
+        cout << "\nSlect your perfect operation : ";
+        cin >> choise;
+        switch (choise)
+        {
+        case 1:
+            cout << "\nItem : ";
+            fgetc(stdin);
+            fgets(ord.itm[ord.update].item, 20, stdin);
+            ord.itm[ord.update].item[strlen(ord.itm[ord.update].item) - 1] = 0;
+            break;
+        case 2:
+            cout << "\nQuantity : ";
+            cin >> ord.itm[ord.update].qty;
+            break;
+        case 3:
+            cout << "\nPrice : ";
+            cin >> ord.itm[ord.update].price;
+            break;
+        default:
+            main_operation();
+            break;
+        }
+    }
+}
+
 void operationExitFunction()
 {
     system("cls");
@@ -240,17 +290,20 @@ void search_item()
             }
             else
             {
+                // ord.update = i;
                 foundItem = i;
             }
         }
         if (count < ord.numberofitems && ord.numberofitems != 0)
         {
             cout << "\nItem is found " << foundItem << " position in the list\n";
+            ord.update = foundItem;
         }
 
         else
         {
             cout << "\nItem is not found in the list !! Please trye again\n";
+            ord.update = -1;
         }
     }
 }
