@@ -82,7 +82,7 @@ void main_operation()
     int choise_operation;
     do
     {
-        system("cls");
+
         cout << "\n1.Item Insert";
         cout << "\n2.Item delete";
         cout << "\n3.Update list";
@@ -91,6 +91,7 @@ void main_operation()
         cout << "\n6.Create Bill";
         cout << "\n\n### without (1,2,3,4,5) keys Press any key to Exit ###";
         cout << "\n\nInput your choise : ";
+       // system("cls");
         cin >> choise_operation;
         switch (choise_operation)
         {
