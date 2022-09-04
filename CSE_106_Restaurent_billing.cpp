@@ -91,7 +91,7 @@ void main_operation()
         cout << "\n6.Create Bill";
         cout << "\n\n### without (1,2,3,4,5) keys Press any key to Exit ###";
         cout << "\n\nInput your choise : ";
-       // system("cls");
+
         cin >> choise_operation;
         switch (choise_operation)
         {
@@ -237,12 +237,13 @@ void delete_item()
 
 void display()
 {
-    cout << "\n-----------------------------------------------------------\n";
+    cout << "\n----------------------------------------------------------------------\n";
     cout << "Items\t\t";
     cout << "Id\t\t";
     cout << "Qty\t\t";
+    cout << "Price\t\t";
     cout << "Total\t\t";
-    cout << "\n-----------------------------------------------------------";
+    cout << "\n------------------------------------------------------------------------";
     cout << "\n\n";
     bill_body();
 }
@@ -268,6 +269,7 @@ void bill_body()
         cout << ord.itm[i].item << "\t\t";
         cout << ord.itm[i].id << "\t\t";
         cout << ord.itm[i].qty << "\t\t";
+        cout<<ord.itm[i].price<<"\t\t";
         cout << ord.itm[i].pricePerItem << "\n";
     }
 }
@@ -316,22 +318,23 @@ void generate_bill_header()
     cout << "\nDate: " << ord.date;
     cout << "\nInvoice To: " << ord.customer;
     cout << "Cell Number : " << ord.cell_number << "\n\n";
-    cout << "------------------------------------------------------\n";
+    cout << "----------------------------------------------------------------------\n";
     cout << "Items\t\t";
     cout << "Id\t\t";
     cout << "Qty\t\t";
+    cout << "Price\t\t";
     cout << "Total\t\t";
-    cout << "\n------------------------------------------------------";
+    cout << "\n-----------------------------------------------------------------------";
     cout << "\n\n";
 }
 void bill_footer()
 {
     ord.total_vat = ord.total * (ord.vat / 100);
     cout << "\n";
-    cout << "------------------------------------------------------";
+    cout << "----------------------------------------------------------------------";
     cout << "\nTotal(Without VAT)";
-    cout << "\t\t\t\t" << ord.total;
-    cout << "\nVAT\t\t\t\t\t\t" << ord.vat << "\n";
-    cout << "-------------------------------------------------------";
-    cout << "\nTotal(With VAT)\t\t\t\t\t" << ord.total + ord.total_vat << "\n\n\n";
+    cout << "\t\t\t\t\t\t" << ord.total;
+    cout << "\n\nVAT\t\t\t\t\t\t\t\t" << ord.vat << "\n";
+    cout << "-----------------------------------------------------------------------";
+    cout << "\nTotal(With VAT)\t\t\t\t\t\t\t" << ord.total + ord.total_vat << "\n\n\n";
 }
